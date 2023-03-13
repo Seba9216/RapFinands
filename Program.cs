@@ -68,6 +68,7 @@ namespace Rap_Finands
                         break;
                     default:
                         Console.WriteLine("UGYLDIGT VALGT!!");
+                        dos_start();
                         Console.ReadKey();
                         break;
 
@@ -151,7 +152,7 @@ namespace Rap_Finands
         
         public static bool GemTrans(Konto konto, string tekst, float beløb) {
             var saldo = findSaldo(konto,beløb);
-            if (saldo + beløb < 0) return false;
+            if (konto.transaktioner.Last().saldo - saldo < 0) return false; 
             var t = new Transaktion();
             t.tekst = tekst;
             t.amount = saldo;
