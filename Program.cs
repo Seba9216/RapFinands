@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Security.Cryptography.X509Certificates;
 using Newtonsoft.Json;
 
 namespace Rap_Finands
@@ -97,7 +98,7 @@ namespace Rap_Finands
             Console.Write("Beløb: ");
             float amount = float.Parse(Console.ReadLine());
             if (GemTrans(k,tekst,amount)) {
-                Console.WriteLine("Transkationen blev gemt. Ny saldo på kontoen: "+findSaldo(k,amount));
+                Console.WriteLine("Transkationen blev gemt. Ny saldo på kontoen: "+findSaldo(k,k.transaktioner.Select(x => x.amount).Sum()));
                 gem();
             } else
                 Console.WriteLine("Transaktionen kunne ikke gemmes (Der var sikkert ikke penge nok på kontoen)");
@@ -154,7 +155,7 @@ namespace Rap_Finands
             var t = new Transaktion();
             t.tekst = tekst;
             t.amount = saldo;
-            t.saldo = t.amount + saldo;
+            t.saldo = konto.transaktioner.Select(x => x.amount).Sum() + saldo;
             t.dato = DateTime.Now;
             
             konto.transaktioner.Add(t);
