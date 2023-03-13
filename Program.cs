@@ -116,7 +116,7 @@ namespace Rap_Finands
         public static Konto lavKonto() {
             return new Konto();
         }
-
+        
         /*
         fed metode til at lave helt nye kontonumre ~Konrad
         */
@@ -151,7 +151,8 @@ namespace Rap_Finands
         
         public static bool GemTrans(Konto konto, string tekst, float beløb) {
             var saldo = findSaldo(konto,beløb);
-            if (konto.transaktioner.Last().saldo - saldo < 0) return false; 
+            if (konto.transaktioner.Count <= 0 && beløb < 0) return false;
+            if (konto.transaktioner.Last().saldo + saldo < 0) return false; 
             var t = new Transaktion();
             t.tekst = tekst;
             t.amount = saldo;
