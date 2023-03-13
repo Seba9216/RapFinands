@@ -64,12 +64,11 @@ namespace Rap_Finands
                         dos_udskrivKonto(dos_findKonto());
                         break;
                     case 0:
-                        blivVedogved = false;
+                        Environment.Exit(0);
                         break;
                     default:
                         Console.WriteLine("UGYLDIGT VALGT!!");
                         dos_start();
-                        Console.ReadKey();
                         break;
 
                 }
