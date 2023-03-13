@@ -57,6 +57,7 @@ namespace Rap_Finands
                         break;
                     case 2:
                         dos_opretTransaktion(dos_findKonto());
+                       
                         break;
                     case 3:
                         dos_udskrivKonto(dos_findKonto());
@@ -157,6 +158,7 @@ namespace Rap_Finands
             t.dato = DateTime.Now;
             
             konto.transaktioner.Add(t);
+            
             return true;
         }
         public static float findSaldo(Konto k) {
@@ -173,7 +175,7 @@ namespace Rap_Finands
         public static void gem() 
         {
             File.WriteAllText(datafil,JsonConvert.SerializeObject(konti));
-            File.Delete(datafil); //Fjern debug fil
+             //Fjern debug fil
         }
         public static void hent()
         {
